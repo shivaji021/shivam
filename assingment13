@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management</title>
+  <style>
+    /* Some basic styling for demonstration purposes */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    button {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h2>User List</h2>
+<ul id="userList"></ul>
+
+<script>
+  // Function to retrieve user details from localStorage
+  function getUserDetails() {
+    var userDetails = localStorage.getItem('userDetails');
+    return userDetails ? JSON.parse(userDetails) : [];
+  }
+
+  // Function to save user details to localStorage
+  function saveUserDetails(userDetails) {
+    localStorage.setItem('userDetails', JSON.stringify(userDetails));
+  }
+
+  // Function to render user details in the UI
+  function renderUserList() {
+    var userListElement = document.getElementById('userList');
+    userListElement.innerHTML = '';
+
+    var userDetails = getUserDetails();
+
+    userDetails.forEach(function(user, index) {
+      var li = document.createElement('li');
+      li.textContent = user.name + ' - ' + user.age + ' years old ';
+
+      var deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.addEventListener('click', function() {
+        // Remove user from localStorage and UI
+        userDetails.splice(index, 1);
+        saveUserDetails(userDetails);
+        renderUserList();
+      });
+
+      li.appendChild(deleteButton);
+      userListElement.appendChild(li);
+    });
+  }
+
+  // Initial rendering
+  renderUserList();
+
+  // Example: Adding users to localStorage
+  saveUserDetails([{ name: 'User1', age: 25 }, { name: 'User2', age: 30 }]);
+</script>
+
+</body>
+</html>
