@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Details Form</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>User Details</h2>
+  <div id="userDetailsContainer"></div>
+  <!-- Your form remains unchanged -->
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+CSS (styles.css):
+
+css
+Copy code
+/* Existing styles remain unchanged */
+
+.user-detail {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete
