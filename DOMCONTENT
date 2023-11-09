@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+</head>
+<body>
+
+    <div id="userDetails"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Make a GET request to the CRUD API
+            fetch('https://your-crud-api-endpoint.com/users')
+                .then(response => response.json())
+                .then(data => {
+                    // Assuming data is an array of user details
+                    displayUserDetails(data);
+                })
+                .catch(error => console.error('Error fetching user details:', error));
+        });
+
+        function displayUserDetails(users) {
+            // Display user details on the website
+            const userDetailsDiv = document.getElementById('userDetails');
+
+            if (users.length === 0) {
+                userDetailsDiv.innerText = 'No user details found.';
+            } else {
+                const userDetailsList = document.createElement('ul');
+
+                users.forEach(user => {
+                    const listItem = document.createElement('li');
+                    listItem.innerText = `User ID: ${user.id}, Name: ${user.name}, Email: ${user.email}`;
+                    userDetailsList.appendChild(listItem);
+                });
+
+                userDetailsDiv.appendChild(userDetailsList);
+            }
+        }
+    </script>
+
+</body>
+</html>
