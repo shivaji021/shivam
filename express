@@ -1,0 +1,43 @@
+// Import required modules
+const express = require('express');
+
+// Create an Express application
+const app = express();
+
+// Use middleware to parse URL-encoded data
+app.use(express.urlencoded({ extended: true }));
+
+// Define the /add-product route
+app.get('/add-product', (req, res) => {
+  // Send a form to the user
+  res.send(`
+    <form action="/add-product" method="post">
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" name="productName" required>
+      
+      <label for="productSize">Product Size:</label>
+      <input type="text" id="productSize" name="productSize" required>
+
+      <button type="submit">Add Product</button>
+    </form>
+  `);
+});
+
+// Handle the form submission using POST method
+app.post('/add-product', (req, res) => {
+  // Parse and log the form data
+  const productName = req.body.productName;
+  const productSize = req.body.productSize;
+
+  console.log('Product Name:', productName);
+  console.log('Product Size:', productSize);
+
+  // Send a response
+  res.send('Product added successfully!');
+});
+
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
