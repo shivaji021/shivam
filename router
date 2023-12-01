@@ -1,0 +1,86 @@
+ project-directory
+  |- routes
+    |- admin.js
+    |- shop.js
+  |- app.js
+Code for admin.js (routes/admin.js):
+
+javascript
+Copy code
+const express = require('express');
+const router = express.Router();
+
+// Define /admin routes
+router.get('/add-product', (req, res) => {
+  // Render the form for adding a product
+  res.send('Admin Add Product Form');
+});
+
+router.post('/add-product', (req, res) => {
+  // Handle form submission for adding a product
+  res.send('Product added successfully!');
+});
+
+module.exports = router;
+Code for shop.js (routes/shop.js):
+
+javascript
+Copy code
+const express = require('express');
+const router = express.Router();
+
+// Define /shop routes
+router.get('/', (req, res) => {
+  // Render the shop page
+  res.send('Shop Page');
+});
+
+// Add more routes for the shop as needed
+
+module.exports = router;
+Code for app.js:
+
+javascript
+Copy code
+const express = require('express');
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
+const app = express();
+
+// Use middleware to parse URL-encoded data
+app.use(express.urlencoded({ extended: true }));
+
+// Use /admin routes
+app.use('/admin', adminRoutes);
+
+// Use /shop routes
+app.use('/shop', shopRoutes);
+
+// Handle 404 - Page Not Found
+app.use((req, res) => {
+  res.status(404).send('Page Not Found');
+});
+
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+Git Commands:
+
+bash
+Copy code
+# Initialize Git (if not already initialized)
+git init
+
+# Add files to staging area
+git add .
+
+# Commit changes
+git commit -m "Implemented Express routers and organized code"
+
+# Create a new repository on GitHub and follow the instructions to add a remote origin
+
+# Push changes to GitHub
+git push origin master
